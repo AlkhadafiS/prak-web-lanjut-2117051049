@@ -9,14 +9,4 @@ class Home extends BaseController
         return view('welcome_message');
     }
 
-    public function profile($nama ="", $kelas="", $npm=""): string
-    {
-        $data = [
-            'nama' => $nama,
-            'kelas' => $kelas,
-            'npm' => $npm
-        ];
-        return view('profile', $data);
-    }
-
 }
