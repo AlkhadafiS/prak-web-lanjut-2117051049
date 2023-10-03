@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <!-- <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>"> -->
-    <title>Import Data</title>
-</head>
-<body>
-    <h2>Form Tambah Data</h2>
+<?= $this->extend('layouts/app') ?>
+<?= $this->section('content') ?>
+<nav class="navbar bg-body-tertiary">
+    <!-- navbar -->
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      Pemrograman Web lanjut
+    </a>    
+  </div>
+</nav><br>
+<div class="container">
     <form action="<?=base_url("user/store");?>" method="POST">
-    <table>
+
+    <!-- <table>
         <tr>
             <td>Nama</td>
             <td>:</td>
@@ -46,7 +45,38 @@
         <tr>
             <td><input type="submit" value="Simpan"></td>
         </tr>
-    </table>
+    </table> -->
+
+    <div class="mb-3 row">
+            <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : '';?>" name="nama" value="<?= old('nama'); ?>">
+            <div class="invalid-feedback">
+                <?= $validation->getError('nama') ;?>
+            </div>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="kelas" class="col-sm-2 col-form-label">Kelas</label>
+            <div class="col-sm-10">
+                <select class="form-select" aria-label="Default select example" id="kelas" name="kelas">
+                    <?php foreach($kelas as $item):?>
+                        <option value="<?=$item['id']?>"><?=$item['nama_kelas']?></option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="npm" class="col-sm-2 col-form-label">NPM</label>
+            <div class="col-sm-10">
+                <input class="form-control <?= ($validation->hasError('npm')) ? 'is-invalid' : '';?>" name="npm" value="<?= old('npm'); ?>">
+                <div class="invalid-feedback">
+                <?= $validation->getError('npm') ;?>
+            </div>
+            </div>
+        </div>
+        <input type="submit" name="tambah_data" value="Tambah Data" class="btn btn-primary">
+        <a href="/user" class="btn btn-danger">Kembali</a>
     </form>
-</body>
-</html>
+</div>
+<?= $this->endSection() ?>
