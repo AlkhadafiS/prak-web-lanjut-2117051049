@@ -22,27 +22,33 @@
         CRUD <cite title="Source Title">Create, Read, Update, Delete</cite>
       </figcaption>
     </figure>
-    <a href="/user/create" type="button" class="btn btn-primary">Tambah Data</a>
+    <a href="<?= base_url('/user/create') ?>" type="button" class="btn btn-primary">Tambah Data</a>
     <div class="table-responsive">
         <table class="table align-middle">
             <thead>
             <tr>
-                <th>ID</th>
+                <th>No.</th>
                 <th>Nama</th>
                 <th>NPM</th>
-                <th>Kelas</th>
-                <th>Aksi</th>
+                <th style="text-align: center; vertical-align: middle;">Kelas</th>
+                <th style="text-align: center; vertical-align: middle;">Aksi</th>
             </tr>
         </thead>
         <tbody>
             <?php
+            $no = 1;
             foreach ($users as $user) {
             ?>
                 <tr>
-                    <td><?= $user['id'] ?></td>
+                    <td><?= $no++ ?></td>
                     <td><?= $user['nama'] ?></td>
                     <td><?= $user['npm'] ?></td>
-                    <td><?= $user['nama_kelas'] ?></td>
+                    <td style="text-align: center; vertical-align: middle;"><?= $user['nama_kelas'] ?></td>
+                    <td style="text-align: center; vertical-align: middle;">
+                    <a class="btn btn-primary" href="<?= base_url('user/' . $user['id']) ?>">Detail</a>
+                      <button class="btn btn-warning" type="button">Edit</button>
+                      <button class="btn btn-danger" type="button">Delete</button>
+                    </td>
                 </tr>
             <?php
             }
