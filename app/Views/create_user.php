@@ -9,7 +9,7 @@
   </div>
 </nav><br>
 <div class="container">
-    <form action="<?=base_url("user/store");?>" method="POST">
+    <form class="container" action=<?= base_url('user/store') ?> method="POST" enctype="multipart/form-data">
 
     <!-- <table>
         <tr>
@@ -73,6 +73,12 @@
                 <div class="invalid-feedback">
                 <?= $validation->getError('npm') ;?>
             </div>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="col-sm-10">
+                <label> Choose the File to upload: </label>
+                <input type="file" id="foto" name="foto"/>
             </div>
         </div>
         <input type="submit" name="tambah_data" value="Tambah Data" class="btn btn-primary">
