@@ -92,7 +92,6 @@ class UserController extends BaseController
             ]
         ])) {
             $validation = \Config\Services::validation();
-            // dd($validation);
             return redirect()->to(base_url('/user/create'))->withInput()->with('validation', $validation);        
         }
 
@@ -121,7 +120,6 @@ class UserController extends BaseController
             'npm' => $this->request->getVar('npm'),
         ];
 
-        // dd($data);
         return redirect()->to('/user');
     }
 
@@ -134,6 +132,78 @@ class UserController extends BaseController
             'user' => $user,
         ];
         return view('profile', $data);
+    }
+
+    public function edit($id)
+    {
+        $user = $this->userModel->getUser($id);
+        $kelas = $this->kelasModel->getKelas();
+        $data = [
+            'title' => 'Edit User',
+            'user' => $user,
+            'kelas' => $kelas,
+            'validation' => \Config\Services::validation()
+
+        ];
+        return view('edit_user', $data);
+    }
+    public function update($id)
+    {
+        if (!$this->validate([
+            'nama' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} mahasiswa harus di isi.'
+                ]
+            ],
+            'npm' => [
+                'rules' => 'required|max_length[25]',
+                'errors' => [
+                    'required' => '{field} mahasiswa harus di isi.',
+                    'max_length[25]' => '{field} mahasiswa maksimal 10.'
+                ]
+            ]
+        ])) {
+            $validation = \Config\Services::validation();
+            return redirect()->to(base_url('/user/' . $id . '/edit'))->withInput()->with('validation', $validation);
+        }
+        
+        $path = 'assets/uploads/img/';
+        $foto = $this->request->getFile('foto');
+
+        $data = [
+            'nama' => $this->request->getVar('nama'),
+            'id_kelas' => $this->request->getVar('kelas'),
+            'npm' => $this->request->getVar('npm'),
+        ];
+        if ($foto->isValid()) {
+            $name = $foto->getRandomName();
+
+            if ($foto->move($path, $name)) {
+                $foto_path = base_url($path . $name);
+
+                $data['foto'] = $foto_path;
+            }
+        }
+
+        $result = $this->userModel->updateUser($data, $id);
+
+        if (!$result) {
+            return redirect()->back()->withInput()
+                ->with('error', 'Gagal mengubah data');
+        }
+        return redirect()->to(base_url('/user'));
+    }
+
+
+    public function destroy($id)
+    {
+        $result = $this->userModel->deleteUser($id);
+        if (!$result) {
+            return redirect()->back()->with('error', 'Gagal menghapus data');
+        }
+        return redirect()->to(base_url('/user'))
+            ->with('success', 'Berhasil menghapus data!');
     }
 
 }
