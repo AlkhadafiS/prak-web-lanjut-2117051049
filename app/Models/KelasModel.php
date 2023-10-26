@@ -42,4 +42,9 @@ class KelasModel extends Model
     public function getKelas(){
         return $this->findAll();
     }
+
+    public function saveKelas($data)
+    {
+        $this->insert($data);
+    }
 }

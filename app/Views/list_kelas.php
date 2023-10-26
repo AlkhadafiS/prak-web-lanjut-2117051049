@@ -27,14 +27,12 @@
         CRUD <cite title="Source Title">Create, Read, Update, Delete</cite>
       </figcaption>
     </figure>
-    <a href="<?= base_url('/user/create') ?>" type="button" class="btn btn-primary">Tambah Data</a>
+    <a href="<?= base_url('/user/kelas/create') ?>" type="button" class="btn btn-primary">Tambah Data</a>
     <div class="table-responsive">
         <table class="table align-middle">
             <thead>
             <tr>
                 <th>No.</th>
-                <th>Nama</th>
-                <th>NPM</th>
                 <th style="text-align: center; vertical-align: middle;">Kelas</th>
                 <th style="text-align: center; vertical-align: middle;">Aksi</th>
             </tr>
@@ -46,11 +44,9 @@
             ?>
                 <tr>
                     <td><?= $no++ ?></td>
-                    <td><?= $user['nama'] ?></td>
-                    <td><?= $user['npm'] ?></td>
                     <td style="text-align: center; vertical-align: middle;"><?= $user['nama_kelas'] ?></td>
                     <td class="d-flex justify-content-center">
-                    <a class="btn btn-primary" href="<?= base_url('user/' . $user['id']) ?>" style="margin-right: 5px;">Detail</a>
+                    <!-- <a class="btn btn-primary" href="<?= base_url('user/' . $user['id']) ?>" style="margin-right: 5px;">Detail</a> -->
                       <a href="<?= base_url('/user/' . $user['id'] . '/edit') ?>" class="btn btn-warning" style="margin-right: 5px;">Edit</a>
                       <form action="<?=base_url('user/' . $user['id'])?>" method="POST">
                         <input type="hidden" name="_method" value="DELETE">
