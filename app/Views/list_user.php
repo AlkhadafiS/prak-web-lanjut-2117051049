@@ -11,7 +11,7 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="#">Pemrograman Web Lanjut<span class="sr-only"></span></a>
       <a class="nav-item nav-link" href="<?= base_url('/user') ?>">List User</a>
-      <a class="nav-item nav-link" href="<?= base_url('/user/kelas') ?>">List Kelas</a>
+      <a class="nav-item nav-link" href="<?= base_url('/kelas') ?>">List Kelas</a>
     </div>
   </div>
 </nav><br>
