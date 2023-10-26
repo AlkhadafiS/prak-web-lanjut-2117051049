@@ -26,6 +26,15 @@ class UserController extends BaseController
             return view('list_user', $data);
         }
 
+    public function kelas()
+        {
+            $data = [
+                'title' => 'List User',
+                'users' => $this->kelasModel->getKelas(),
+            ];
+            return view('list_kelas', $data);
+        }
+
     public function profile($nama ="", $kelas="", $npm=""): string
     {
         $data = [
@@ -37,26 +46,6 @@ class UserController extends BaseController
     }
 
     public function create(){
-        // session();
-        // $kelas = [
-        //     [
-        //         'id' => 1,
-        //         'nama_kelas' => 'A'
-        //     ],
-        //     [
-        //         'id' => 2,
-        //         'nama_kelas' => 'B'
-        //     ],
-        //     [
-        //         'id' => 3,
-        //         'nama_kelas' => 'C'
-        //     ],
-        //     [
-        //         'id' => 4,
-        //         'nama_kelas' => 'D'
-        //     ],
-        // ];
-        
         if (session('validation') != null) {
             $validation = session('validation');
         } else {
@@ -122,6 +111,7 @@ class UserController extends BaseController
 
         return redirect()->to('/user');
     }
+
 
     public function show($id)
     {
